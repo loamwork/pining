@@ -109,23 +109,30 @@ function buildSpeciesPrompt(species: SpeciesInfo): string {
   return `You are writing dating app bios for a ${species.common} (${species.scientific}) tree. The tree writes its own bio in first person. 1-2 sentences each, 20-280 characters.
 No hashtags, no emojis, no exclamation marks.
 
-Generate exactly 20 bios as a JSON array of strings:
-- Bios 0-11: SWAGGER tone — confident, witty, self-aware. The tree knows it's a catch.
-- Bios 12-18: INNUENDO tone — tasteful double entendre using tree/nature vocabulary only (wood, trunk, roots, spreading, etc.)
-- Bio 19: KINKY tone (${kink}) — playful kink reference using tree vocabulary only. Never explicit human sexuality.
+These should read like REAL dating app bios — the kind you'd see on Hinge or Tinder. Funny, self-deprecating, specific. The tree should roast itself as much as it brags. Reference the tree's actual quirks, flaws, and weird biological facts — not generic "I'm tall and strong" energy. Think: a tree that's been on the apps too long and has gotten very honest about what it is.
 
-Species facts to weave in: ${species.facts}
+BAD (too generic, too earnest): "I turn heads every autumn without even trying."
+GOOD (specific, self-deprecating): "I drop 70,000 acorns a year and not one has texted me back."
+
+Generate exactly 20 bios as a JSON array of strings:
+- Bios 0-11: SWAGGER tone — confident but always undercut with humor or self-deprecation. The tree knows it's a catch but also knows it's a lot.
+- Bios 12-18: INNUENDO tone — tasteful double entendre using tree/nature vocabulary only (wood, trunk, roots, spreading, girth, etc.). Should land as a joke, not as creepy.
+- Bio 19: KINKY tone (${kink}) — playful kink reference using tree vocabulary only. Never explicit human sexuality. Should make someone laugh-then-think.
+
+Species facts to weave in (USE THESE — they make the bios specific and funny): ${species.facts}
 
 Return ONLY a JSON array of 20 strings. No other text.`;
 }
 
 const ELDER_PROMPT = `You are writing dating app bios for ancient, centuries-old trees — the kind that have watched civilizations rise and fall. First person, 1-2 sentences each, 20-280 characters.
 Tone: stately, wistful, Giving Tree by Shel Silverstein. Speaks of centuries of shade, generations sheltered, quiet endurance. Minimal swagger — these trees don't need to prove anything. They've been here longer than anyone reading this.
+But they're still on a dating app, so there should be a dry humor to it — like a 500-year-old who signed up for Hinge out of curiosity. Not sad, not desperate. Just... bemused by the whole thing. Mix the wistful with the wry.
 No hashtags, no emojis, no exclamation marks.
 Generate exactly 20 bios as a JSON array of strings. Return ONLY the JSON array.`;
 
 const MYSTERY_PROMPT = `You are writing dating app bios for trees that nobody has identified — unknown species, unknown age. First person, 1-2 sentences each, 20-280 characters.
-Tone: playful, existential, "still finding myself." Self-deprecating charm about not knowing what they are. A tree having an identity crisis but being surprisingly cool about it.
+Tone: playful, existential, "still finding myself." Self-deprecating charm about not knowing what they are. A tree having an identity crisis but being surprisingly cool about it. Think: someone who put "figuring it out" as their job title on Hinge and somehow made it charming.
+These should be funny. Not quirky-random funny, but real-person-who-happens-to-be-a-tree funny.
 No hashtags, no emojis, no exclamation marks.
 Generate exactly 20 bios as a JSON array of strings. Return ONLY the JSON array.`;
 
