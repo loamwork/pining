@@ -1,0 +1,7 @@
+node_modules/
+dist/
+indexer/output/
+indexer/data/species-bios.json
+.mcp.json
+*.sqlite
+.DS_Store
