@@ -1,0 +1,12 @@
+{
+  "version": "2026-04-16",
+  "sources": [
+    "Lukaszkiewicz & Kosmala 2008 (AUF 34(3):137)",
+    "Pretzsch et al. 2017 (Scientific Reports)",
+    "Roman et al. 2019 (PLoS ONE)",
+    "Purcell/Purdue Extension"
+  ],
+  "notes": "Default 1.15 is a conservative central estimate. ISA growth factors are calibrated to open-grown landscape trees. Urban street trees under moderate stress are typically 10-25% older than the ISA formula predicts for the same DBH. Multiply the ISA-computed age by this factor.",
+  "default": 1.15,
+  "bySpecies": {}
+}

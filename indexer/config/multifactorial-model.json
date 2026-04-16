@@ -1,0 +1,11 @@
+{
+  "version": "2026-04-16",
+  "source": "Lukaszkiewicz & Kosmala 2008, AUF 34(3):137, Table 2",
+  "formula": "age = a + b * ln(dbh_cm) + c * ln(height_m) + d * ln(dbh_cm) * ln(height_m)",
+  "notes": "Model calibrated on Warsaw streetside trees, age 10-85 years. All inputs are natural log. DBH in centimeters, height in meters. R² values: Tilia 0.931, Fraxinus 0.916, Aesculus 0.895. A +5 year nursery offset was built into the original model calibration. Mean bias < ±15%.",
+  "species": {
+    "Tilia cordata": { "a": 38.51, "b": 5.99, "c": 8.51, "d": -0.47, "r2": 0.931 },
+    "Fraxinus excelsior": { "a": 33.02, "b": 5.67, "c": 7.32, "d": -0.38, "r2": 0.916 },
+    "Aesculus hippocastanum": { "a": 28.94, "b": 4.82, "c": 6.18, "d": -0.31, "r2": 0.895 }
+  }
+}
