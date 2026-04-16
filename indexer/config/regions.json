@@ -1,0 +1,19 @@
+{
+  "version": "2026-04-16",
+  "tileSizeKm": 5,
+  "regions": [
+    { "id": "nyc", "name": "New York City", "sources": ["nyc", "nyc_forestry"], "bounds": { "minLat": 40.4774, "maxLat": 40.9176, "minLon": -74.2591, "maxLon": -73.7004 } },
+    { "id": "dc", "name": "Washington DC", "sources": ["washington-dc", "washington_dc_all"], "bounds": { "minLat": 38.7916, "maxLat": 39.0000, "minLon": -77.1198, "maxLon": -76.9094 } },
+    { "id": "chicago", "name": "Chicago", "sources": ["madison", "arlington_heights", "glenview", "northbrook", "park_ridge", "winnetka", "deerfield", "glencoe", "kenilworth", "morton_grove", "oak_park", "evanston"], "bounds": { "minLat": 41.6000, "maxLat": 43.1500, "minLon": -89.5500, "maxLon": -87.5000 } },
+    { "id": "seattle", "name": "Seattle", "sources": ["seattle", "bellevue", "redmond"], "bounds": { "minLat": 47.3000, "maxLat": 47.8000, "minLon": -122.5000, "maxLon": -122.0000 } },
+    { "id": "portland", "name": "Portland", "sources": ["pdx-street", "pdx-park", "pdx_heritage", "beaverton"], "bounds": { "minLat": 45.3000, "maxLat": 45.6500, "minLon": -122.9000, "maxLon": -122.4000 } },
+    { "id": "bayarea", "name": "Bay Area", "sources": ["san_francisco", "san_jose", "san_jose_heritage", "oakland", "palo_alto", "mountain_view"], "bounds": { "minLat": 37.1000, "maxLat": 37.9000, "minLon": -122.6000, "maxLon": -121.7000 } },
+    { "id": "socal", "name": "Southern California", "sources": ["la_county", "pasadena", "santa_monica", "san_diego", "santa_barbara", "irvine"], "bounds": { "minLat": 32.5000, "maxLat": 34.8000, "minLon": -119.8000, "maxLon": -116.9000 } },
+    { "id": "denver", "name": "Denver", "sources": ["denver", "boulder", "santa_fe"], "bounds": { "minLat": 35.5000, "maxLat": 40.1000, "minLon": -105.5000, "maxLon": -104.5000 } },
+    { "id": "atlanta", "name": "Atlanta", "sources": ["atlanta", "atlanta_champion", "athens_uga"], "bounds": { "minLat": 33.5000, "maxLat": 34.1000, "minLon": -84.6000, "maxLon": -83.2000 } },
+    { "id": "texas", "name": "Texas", "sources": ["austin", "austin_downtown"], "bounds": { "minLat": 30.1000, "maxLat": 30.5500, "minLon": -97.9500, "maxLon": -97.5500 } },
+    { "id": "northeast", "name": "Northeast US", "sources": ["boston", "cambridge", "ithaca", "peekskill", "bedford_ny", "ossining", "dobbs_ferry", "pittsburgh"], "bounds": { "minLat": 40.2000, "maxLat": 42.5000, "minLon": -80.1000, "maxLon": -73.7000 } },
+    { "id": "london", "name": "London", "sources": ["london"], "bounds": { "minLat": 51.2800, "maxLat": 51.6900, "minLon": -0.5100, "maxLon": 0.3400 } },
+    { "id": "uk_other", "name": "UK Other", "sources": ["bristol", "edinburgh", "york", "york-private", "york_tpo", "cambridge_uk", "uk_planning_tpo"], "bounds": { "minLat": 50.3000, "maxLat": 56.0000, "minLon": -3.6000, "maxLon": 0.2000 } }
+  ]
+}
