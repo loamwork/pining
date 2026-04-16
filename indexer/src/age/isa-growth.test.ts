@@ -101,6 +101,48 @@ describe("estimateAgeIsa", () => {
     expect(withAdj!.years).not.toBe(withoutAdj!.years);
   });
 
+  it("ALLCAPS scientific name matches title-case entry (Ithaca)", () => {
+    const result = estimateAgeIsa(
+      25.4,
+      "ACER SACCHARINUM",
+      "species",
+      null,
+      growthFactors,
+      urbanAdjustment,
+    );
+    expect(result).not.toBeNull();
+    expect(result!.method).toBe("isa-dbh-growth-factor");
+    expect(result!.years).toBeGreaterThan(0);
+  });
+
+  it("ALLCAPS with cultivar matches base species (Park Ridge)", () => {
+    const result = estimateAgeIsa(
+      25.4,
+      "TILIA CORDATA 'GLENLEVEN'",
+      "species",
+      null,
+      growthFactors,
+      urbanAdjustment,
+    );
+    expect(result).not.toBeNull();
+    expect(result!.method).toBe("isa-dbh-growth-factor");
+    expect(result!.years).toBeGreaterThan(0);
+  });
+
+  it("genus-max works case-insensitively", () => {
+    const result = estimateAgeIsa(
+      25.4,
+      "ACER",
+      "genus",
+      null,
+      growthFactors,
+      urbanAdjustment,
+    );
+    expect(result).not.toBeNull();
+    expect(result!.method).toBe("isa-dbh-growth-factor-genus-max");
+    expect(result!.years).toBeGreaterThan(0);
+  });
+
   it("no factor found: unknown species returns null", () => {
     const result = estimateAgeIsa(
       25.4,

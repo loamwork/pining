@@ -88,7 +88,7 @@ describe("estimateAge router", () => {
       planted: "2015-02-07T00:00:00.000Z",
       dbh: null,
       height: null,
-    } as RawTree;
+    } as unknown as RawTree;
     const species = {
       rank: "unknown" as const,
       scientificRaw: null,
@@ -115,7 +115,34 @@ describe("estimateAge router", () => {
       installYear: 2008,
       dbh: null,
       height: null,
-    } as RawTree;
+    } as unknown as RawTree;
+    const species = {
+      rank: "unknown" as const,
+      scientificRaw: null,
+      scientificResolved: null,
+      inferredFrom: null,
+    };
+
+    const result = estimateAge(
+      tree,
+      species,
+      growthFactors,
+      urbanAdjustment,
+      multifactorialModel,
+    );
+
+    expect(result.method).toBe("install-year");
+    expect(result.confidence).toBe("high");
+    expect(result.years).toBeGreaterThan(0);
+  });
+
+  it("routes to install-year for Redmond source with string installYear", () => {
+    const tree = {
+      sourceId: "redmond",
+      installYear: "2008",
+      dbh: null,
+      height: null,
+    } as unknown as RawTree;
     const species = {
       rank: "unknown" as const,
       scientificRaw: null,

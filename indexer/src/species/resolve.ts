@@ -45,12 +45,15 @@ export function resolveSpecies(
     };
   }
 
-  // 2. Genus-only — single non-empty word
+  // 2. Genus-only — single non-empty capitalized word (genera are capitalized;
+  //    lowercase single words like "americana" or "rubrum" are species epithets
+  //    without a genus and should fall through to common-name rescue).
   if (sci && !sci.includes(" ")) {
     // But first check if it looks like a Redmond code
     if (tree.sourceId === "redmond" && REDMOND_CODE_RE.test(sci)) {
       // Fall through to step 3
-    } else {
+    } else if (sci[0] === sci[0].toUpperCase() && sci[0] !== sci[0].toLowerCase()) {
+      // Starts with uppercase letter = likely a genus name
       return {
         rank: "genus",
         scientificRaw: sci,
@@ -58,6 +61,7 @@ export function resolveSpecies(
         inferredFrom: null,
       };
     }
+    // lowercase single word = epithet only, fall through to common-name rescue
   }
 
   // 3. Redmond species code

@@ -68,8 +68,11 @@ export function estimateAge(
 
   // 3. Install year — Redmond source.
   if (tree.sourceId === "redmond" && tree.installYear != null) {
-    const result = estimateAgeInstallYear(tree.installYear as number);
-    if (result !== null) return result;
+    const year = Number(tree.installYear);
+    if (!Number.isNaN(year)) {
+      const result = estimateAgeInstallYear(year);
+      if (result !== null) return result;
+    }
   }
 
   // 4. Edinburgh band — string DBH from Edinburgh source.

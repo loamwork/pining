@@ -17,6 +17,16 @@ import type {
   UrbanAdjustmentConfig,
 } from "../types.js";
 
+/**
+ * Normalizes a scientific name for growth-factor lookup:
+ * - Strips cultivar names in single quotes (e.g. 'Glenleven')
+ * - Lowercases for case-insensitive comparison
+ */
+function normalizeForLookup(s: string): string {
+  const cleaned = s.replace(/\s*'[^']*'/g, "").trim();
+  return cleaned.toLowerCase();
+}
+
 export function estimateAgeIsa(
   dbhCm: number,
   scientific: string | null,
@@ -39,10 +49,17 @@ export function estimateAgeIsa(
   let isGenusMax = false;
 
   if (speciesRank === "species") {
-    // Try exact species match
-    const entry = growthFactors.species.find(
-      (e) => e.scientific === scientific,
-    );
+    // Try species match (case-insensitive, cultivar-stripped, binomial fallback)
+    const normalized = scientific ? normalizeForLookup(scientific) : null;
+    const entry = normalized
+      ? growthFactors.species.find((e) => {
+          const entryNorm = e.scientific.toLowerCase();
+          return (
+            entryNorm === normalized ||
+            entryNorm === normalized.split(" ").slice(0, 2).join(" ")
+          );
+        })
+      : null;
     if (entry) {
       factor = entry.factor;
     } else {
@@ -97,9 +114,10 @@ function genusMaxFactor(
   genus: string,
   growthFactors: GrowthFactorTable,
 ): number | null {
+  const genusLower = genus.toLowerCase();
   let max: number | null = null;
   for (const entry of growthFactors.species) {
-    if (entry.genus === genus) {
+    if (entry.genus.toLowerCase() === genusLower) {
       if (max === null || entry.factor > max) {
         max = entry.factor;
       }

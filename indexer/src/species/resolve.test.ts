@@ -136,6 +136,40 @@ describe("resolveSpecies", () => {
     });
   });
 
+  it("epithet-only scientific falls through to common-name rescue (Northbrook)", () => {
+    const tree = stubTree({
+      sourceId: "northbrook",
+      scientific: "americana",
+      common: "American Elm",
+    });
+    const result = resolveSpecies(tree, commonMap, redmondMap);
+    expect(result.rank).toBe("species");
+    expect(result.inferredFrom).toBe("common-name-map");
+    expect(result.scientificResolved).toBe("Ulmus americana");
+  });
+
+  it("epithet-only 'rubrum' with common 'Red Maple' resolves via common (Glencoe)", () => {
+    const tree = stubTree({
+      sourceId: "glencoe",
+      scientific: "rubrum",
+      common: "Red Maple",
+    });
+    const result = resolveSpecies(tree, commonMap, redmondMap);
+    expect(result.rank).toBe("species");
+    expect(result.inferredFrom).toBe("common-name-map");
+    expect(result.scientificResolved).toBe("Acer rubrum");
+  });
+
+  it("capitalized single word is still treated as genus", () => {
+    const tree = stubTree({
+      sourceId: "portland",
+      scientific: "Acer",
+    });
+    const result = resolveSpecies(tree, commonMap, redmondMap);
+    expect(result.rank).toBe("genus");
+    expect(result.inferredFrom).toBeNull();
+  });
+
   it("unknown: null scientific AND null common -> unknown", () => {
     const tree = stubTree({
       sourceId: "portland",
