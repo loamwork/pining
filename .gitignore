@@ -3,5 +3,7 @@ dist/
 indexer/output/
 indexer/data/species-bios.json
 .mcp.json
+.env
+.env.*
 *.sqlite
 .DS_Store
