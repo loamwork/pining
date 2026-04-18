@@ -196,13 +196,14 @@ async function callClaude(
         );
         await sleep(1000 * attempt);
       } else {
-        throw new Error(
-          `Failed after ${MAX_RETRIES} attempts for ${label}: ${msg}`,
+        console.error(
+          `  SKIPPED ${label}: failed after ${MAX_RETRIES} attempts (${msg})`,
         );
+        return null;
       }
     }
   }
-  throw new Error("Unreachable");
+  return null;
 }
 
 // ---------------------------------------------------------------------------
@@ -398,6 +399,7 @@ async function main(): Promise<void> {
       buildSpeciesPrompt(species),
       species.scientific,
     );
+    if (bios === null) return null;
     cache.species[species.scientific] = bios;
     saveCache(cache);
     return { species, bios };
@@ -409,7 +411,7 @@ async function main(): Promise<void> {
   // Elder pool
   if (cache.elder.length === 0) {
     console.log("\nGenerating elder pool...");
-    cache.elder = await callClaude(client, ELDER_PROMPT, "elder");
+    cache.elder = (await callClaude(client, ELDER_PROMPT, "elder")) ?? [];
     saveCache(cache);
   } else {
     console.log("\nElder pool already cached, skipping.");
@@ -418,7 +420,7 @@ async function main(): Promise<void> {
   // Mystery pool
   if (cache.mystery.length === 0) {
     console.log("Generating mystery pool...");
-    cache.mystery = await callClaude(client, MYSTERY_PROMPT, "mystery");
+    cache.mystery = (await callClaude(client, MYSTERY_PROMPT, "mystery")) ?? [];
     saveCache(cache);
   } else {
     console.log("Mystery pool already cached, skipping.");
@@ -430,6 +432,7 @@ async function main(): Promise<void> {
   console.log("=".repeat(60));
 
   for (const result of speciesResults) {
+    if (result === null) continue;
     const kink = assignKinkCategory(result.species.scientific);
     printBios(
       `${result.species.common} (${result.species.scientific}) — kink: ${kink}`,
